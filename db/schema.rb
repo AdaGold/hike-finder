@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_235721) do
+ActiveRecord::Schema.define(version: 2019_04_10_012917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2019_04_01_235721) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "best_month"
+    t.bigint "trailhead_id"
+    t.index ["trailhead_id"], name: "index_hikes_on_trailhead_id"
   end
 
+  create_table "trailheads", force: :cascade do |t|
+    t.string "name"
+    t.string "latitude"
+    t.string "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "hikes", "trailheads"
 end
